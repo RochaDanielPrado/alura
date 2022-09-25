@@ -1,10 +1,6 @@
-import re
-from telefones import TelefonesBr
+from acesso_cep import BuscaEndereco
 
-telefone = '5537998445678'
-print('telefone:', telefone)
+cep = 35501233
+objeto_cep = BuscaEndereco(cep)
 
-telefone_objeto = TelefonesBr(telefone)
-
-
-print('numero formatado:', telefone_objeto.format_numero())
+print(objeto_cep.acessa_via_cep())
