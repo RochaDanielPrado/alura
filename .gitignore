@@ -8,5 +8,23 @@ python/oo2/venv/
 python/python-brasilidades/venv/
 
 
+python/botlinkedin/.idea/
+python/bytebank-tdd/.idea/
+python/extrator-url/.idea/
+python/Jogos/.idea/
+python/linkedin/.idea/
+python/oo/.idea/
+python/oo2/.idea/
+python/python-brasilidades/.idea/
+
+python/botlinkedin/__pycache__/
+python/bytebank-tdd/__pycache__/
+python/extrator-url/__pycache__/
+python/Jogos/__pycache__/
+python/linkedin/__pycache__/
+python/oo/__pycache__/
+python/oo2/__pycache__/
+python/python-brasilidades/__pycache__/
+
 
 
