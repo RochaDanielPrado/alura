@@ -75,7 +75,7 @@ function validaPeso(peso) {
     }
 }
 
-function validaAltura() {
+function validaAltura(altura) {
 
     if(altura >= 0 && altura <= 2.5) {
         return true;
