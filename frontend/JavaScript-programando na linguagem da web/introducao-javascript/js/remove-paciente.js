@@ -9,13 +9,13 @@
 
 var tabela = document.querySelector("table");
 
-tabela.addEventListener("dblclick", function(event){
+tabela.addEventListener("dblclick", function (event) {
     var alvoEvent = event.target;
     var paiDoAlvo = alvoEvent.parentNode; //TR
 
     paiDoAlvo.classList.add("fadeOut");
 
-    setTimeout(function(){
+    setTimeout(function () {
         paiDoAlvo.remove();
     }, 500);
 });
