@@ -12,6 +12,16 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\JavaScript-explorando a linguagem\\8-loops.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "8-Loops",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\JavaScript-explorando a linguagem\\8-loops.js"
         }
+        
     ]
 }
