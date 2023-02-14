@@ -31,12 +31,19 @@ class NegociacaoController {
                     } return item;
                 }));
 
+
         let negociacao = new Negociacao(
             data,
             this._inputQuantidade.value,
             this._inputValor.value
         );
-        console.log(negociacao);
+
+        let diaMesAno = negociacao.data.getDate()
+            + `/` + (negociacao.data.getMonth() + 1)
+            + `/` + negociacao.data.getFullYear();
+
+        console.log(diaMesAno);
+
 
         // adiciona a negociacao em uma lista
     }
