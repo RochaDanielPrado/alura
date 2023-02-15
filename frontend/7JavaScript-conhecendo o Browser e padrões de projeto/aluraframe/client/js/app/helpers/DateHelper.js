@@ -1,14 +1,23 @@
 class DateHelper {
 
-    dataParaTexto(data) {
+    constructor() {
 
-        return data.getDate()
-            + `/` + (data.getMonth() + 1)
-            + `/` + data.getFullYear();
+        throw new Error(`DateHelper não pode ser instanciada [static]`);
+    }
+
+    //static - métodos que podem ser envocados diretamente na classe - sem instancia
+    static dataParaTexto(data) {
+        let dia = String(data.getDate()).padStart(2, `0`);
+        let mes = String(data.getMonth() +1).padStart(2, `0`);
+
+        return `${dia}/${mes}/${data.getFullYear()}`;
 
     }
 
-    textoParaData(texto) {
+    static textoParaData(texto) {
+        // Valida com Templete String
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(texto))
+            throw new Error(`Deve estar no formato aaaa-mm-dd`)
 
         return new Date(...
             texto.split(`-`).map((item, indice) => item - indice % 2));

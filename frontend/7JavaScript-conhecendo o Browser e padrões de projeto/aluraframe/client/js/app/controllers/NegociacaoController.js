@@ -7,6 +7,10 @@ class NegociacaoController {
         this._inputData = $(`#data`);
         this._inputQuantidade = $(`#quantidade`);
         this._inputValor = $(`#valor`);
+        this._listaNegociacoes = new ListaNegociacoes();
+        this._negociacoesView = new NegociacoesView($(`#negociacoesView`));
+                                                    
+        this._negociacoesView.update(this._listaNegociacoes);
 
     }
 
@@ -22,29 +26,33 @@ class NegociacaoController {
         let data = new Date(this._inputData.value.replace(/-/g, `,`))
         */
 
-        let data = new Date(...
-            this._inputData.value
-                .split(`-`)
-                .map((item, indice) => {
-                    if (indice == 1) {
-                        return item - 1;
-                    } return item;
-                }));
+        DateHelper.textoParaData(this._inputData.value);
 
+        // adiciona a negociacao em uma lista
+        this._listaNegociacoes.adiciona(this._criaNegociacao());
+        this._negociacoesView.update(this._listaNegociacoes);
+        this._limpaFormulario();
 
-        let negociacao = new Negociacao(
-            data,
+        console.log(this._listaNegociacoes.negociacoes);
+    }
+
+    _criaNegociacao() {
+
+        return new Negociacao(
+            DateHelper.textoParaData(this._inputData.value),
             this._inputQuantidade.value,
             this._inputValor.value
         );
 
-        let diaMesAno = negociacao.data.getDate()
-            + `/` + (negociacao.data.getMonth() + 1)
-            + `/` + negociacao.data.getFullYear();
+    }
 
-        console.log(diaMesAno);
+    _limpaFormulario() {
 
+        this._inputData.value = ``;
+        this._inputQuantidade.value = 1;
+        this._inputValor.value = 0.0;
 
-        // adiciona a negociacao em uma lista
+        //this._inputData.focus();
+
     }
 }
