@@ -8,5 +8,8 @@
   },
   "author": "Daniel",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "systemjs": "^6.14.0"
+  }
 }

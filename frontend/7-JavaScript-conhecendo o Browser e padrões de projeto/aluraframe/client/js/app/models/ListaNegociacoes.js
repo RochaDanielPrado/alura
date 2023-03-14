@@ -9,6 +9,7 @@ class ListaNegociacoes {
     adiciona(negociacao) {
 
         this._negociacoes.push(negociacao);
+        //console.log(`lista de negociacao:`, this._negociacoes)
         //altera o contexto para Negociacoes
         // Reflect.apply(this._armadilha, this._contexto, [this]);
         //this._armadilha(this);

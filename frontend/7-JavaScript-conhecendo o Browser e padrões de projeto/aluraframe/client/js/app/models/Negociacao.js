@@ -2,9 +2,10 @@ class Negociacao {
 
     constructor(data, quantidade, valor) {
 
-        this._data = new Date(data.getTime());
+        this._data = new Date(data);
         this._quantidade = quantidade;
         this._valor = valor;
+        Object.freeze(this);
 
         Object.freeze(this); /* congela a instancia _
         proteje as variaveis contra alteracoes */
@@ -28,6 +29,7 @@ class Negociacao {
 
     get data() {
         /* programação defensiva */
+        
         return new Date(this._data.getTime());
     }
 

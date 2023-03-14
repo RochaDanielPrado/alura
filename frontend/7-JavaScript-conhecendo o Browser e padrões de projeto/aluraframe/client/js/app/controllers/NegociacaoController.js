@@ -14,9 +14,8 @@ class NegociacaoController {
 
         this._listaNegociacoes = new Bind(
             new ListaNegociacoes(),
-            new NegociacoesView($(`#negociacoesView`)),
-            `adiciona`, `esvazia`, `ordena`, `inverteOrdem`
-        );
+            new NegociacoesView($('#negociacoesView')),
+            'adiciona', 'esvazia', 'ordena', 'inverteOrdem');
 
 
         //this._negociacoesView.update(this._listaNegociacoes);
@@ -30,57 +29,83 @@ class NegociacaoController {
 
         this._ordemAtual = ''; // quando a página for carregada, não tem critério. Só passa a ter quando ele começa a clicar nas colunas
 
+        this._service = new NegociacaoService();
+
+        this._init();
+    }
+
+    _init() {
+
+        this._service
+            .lista()
+            .then(negociacoes =>
+                negociacoes.forEach(negociacao =>
+                    this._listaNegociacoes.adiciona(negociacao)))
+            .catch(erro => this._mensagem.texto = erro);
+
+        setInterval(() => {
+            this.importaNegociacoes();
+        }, 3000);
     }
 
     adiciona(event) {
 
         event.preventDefault();
 
-        /* a data que recebemos do formulario é uma string
-        necessitamos converte-la antes em Date
-        existem várias maneiras
-        
-        substitui - por ,  
-        let data = new Date(this._inputData.value.replace(/-/g, `,`))
-        */
+        let negociacao = this._criaNegociacao();
 
-        DateHelper.textoParaData(this._inputData.value);
+        this._service
+            .cadastra(negociacao)
+            .then(mensagem => {
+                // adiciona a negociacao em uma lista
+                this._listaNegociacoes.adiciona(this._criaNegociacao());
 
-        // adiciona a negociacao em uma lista
-        this._listaNegociacoes.adiciona(this._criaNegociacao());
+                this._mensagem.texto = mensagem;
+                //this._mensagemView.update(this._mensagem);
 
-        this._mensagem.texto = `Negociação adicionada com sucesso!`;
-        //this._mensagemView.update(this._mensagem);
+                this._limpaFormulario();
 
-        this._limpaFormulario();
+                //console.log(this._listaNegociacoes.negociacoes);
+            })
+            .catch(erro => this._mensagem.texto = erro);
 
-        //console.log(this._listaNegociacoes.negociacoes);
+
     }
 
     importaNegociacoes() {
-
-        let service = new NegociacaoService();
-
-        Promise.all([
-            service.obterNegociacoesDaSemana(),
-            service.obterNegociacoesDaSemanaAnterior(),
-            service.obterNegociacoesDaSemanaRetrasada()]
-        ).then(negociacoes => {
-            negociacoes
-                .reduce((arrayAchatado, array) => arrayAchatado.concat(array, []))
-                .forEach(negociacao =>
-                    this._listaNegociacoes.adiciona(negociacao));
-            this._mensagem.texto = `Negociações importadas com sucesso`;
-        })
+        
+        this._service
+            .importa(this._listaNegociacoes.negociacoes)
+            .then(negociacoes => negociacoes.forEach(negociacao => {
+                this._listaNegociacoes.adiciona(negociacao);
+                this._mensagem.texto = `Negociações importadas com sucesso`;
+            }))
             .catch(erro => this._mensagem.texto = erro);
+
+        // Promise.all([
+        //     service.obterNegociacoesDaSemana(),
+        //     service.obterNegociacoesDaSemanaAnterior(),
+        //     service.obterNegociacoesDaSemanaRetrasada()]
+        // ).then(negociacoes => {
+        //     negociacoes
+        //         .reduce((arrayAchatado, array) => arrayAchatado.concat(array, []))
+        //         .forEach(negociacao =>
+        //             this._listaNegociacoes.adiciona(negociacao));
+        //     this._mensagem.texto = `Negociações importadas com sucesso`;
+        // })
+        //     .catch(erro => this._mensagem.texto = erro);
 
     }
 
     apaga() {
-        this._listaNegociacoes.esvazia();
 
-        this._mensagem.texto = `Negociações apagadas com sucesso!`
-        //this._mensagemView.update(this._mensagem);
+        this._service
+            .apaga()
+            .then(mensagem => {
+                this._listaNegociacoes.esvazia();
+                this._mensagem.texto = mensagem;
+            })
+            .catch(erro => this._mensagem.texto = erro);
 
     }
 
@@ -88,8 +113,8 @@ class NegociacaoController {
 
         return new Negociacao(
             DateHelper.textoParaData(this._inputData.value),
-            this._inputQuantidade.value,
-            this._inputValor.value
+            parseInt(this._inputQuantidade.value),
+            parseFloat(this._inputValor.value)
         );
 
     }
@@ -100,7 +125,7 @@ class NegociacaoController {
         this._inputQuantidade.value = 1;
         this._inputValor.value = 0.0;
 
-        //this._inputData.focus();
+        this._inputData.focus();
 
     }
 
