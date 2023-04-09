@@ -1,12 +1,18 @@
+import { Personagem } from "../modules/Personagem.js";
+import { mostrarModal } from "./modal.js";
+
 export class PersonagemView {
     personagens;
+    personagensSelecionados;
 
     constructor(personagens) {
         this.ulPersonagens = document.querySelector('ul#personagens');
         this.personagens = personagens;
+        this.personagensSelecionados = [];
+        this.escutarEventoDuelo()
     }
 
-     render() {
+    render() {
         this.ulPersonagens.innerHTML = ''
         this.personagens.forEach(personagem => {
             const personagemLI = this.criaPersonagem(personagem)
@@ -16,12 +22,12 @@ export class PersonagemView {
 
     criaPersonagem = (personagem) => {
         const personagemLI = document.createElement('li')
-        personagemLI.classList.add('personagem', personagem.tipo);
+        personagemLI.classList.add('personagem', personagem.constructor.tipo);
 
 
-        //const estaSelecionado = this.personagensSelecionados.indexOf(personagem) !== -1 //sintaxe para quando encontra no array
+        const estaSelecionado = this.personagensSelecionados.indexOf(personagem) !== -1 //sintaxe para quando encontra no array
 
-        //if (estaSelecionado) personagemLI.classList.add('selecionado')
+        if (estaSelecionado) personagemLI.classList.add('selecionado')
 
         personagemLI.innerHTML =
 
@@ -38,14 +44,14 @@ export class PersonagemView {
             <div class="container-imagem">
                 <div class="imagem"></div>
                 <div class="container-tipo">
-                    <h2 class="tipo">${personagem.tipo}</h2>
+                    <h2 class="tipo">${personagem.constructor.tipo}</h2>
                 </div>
             </div>
             <div class="container-nome">
                 <h3 class="nome">${personagem.nome}</h3>
             </div>
             <div class="container-descricao">
-                <p class="descricao"></p>
+                <p class="descricao">${personagem.constructor.descricao}</p>
             </div>
         </div>
         <div class="container-inferior">
@@ -57,7 +63,7 @@ export class PersonagemView {
         </div>
         `
 
-        /*const containerLevel = personagemLI.querySelector('.level')
+        const containerLevel = personagemLI.querySelector('.level')
         containerLevel.onclick = (evt) => {
             evt.stopPropagation()
     
@@ -66,10 +72,10 @@ export class PersonagemView {
             if (evt.target.classList.contains('aumentar-level')) personagem.aumentarLevel()
     
             this.render()
-        }*/
+        }
 
 
-        /*personagemLI.onclick = () => {
+        personagemLI.onclick = () => {
             const jaTem2Selecionados = this.personagensSelecionados.length === 2
             if (!jaTem2Selecionados || estaSelecionado) {
                 personagemLI.classList.toggle('selecionado')
@@ -78,37 +84,37 @@ export class PersonagemView {
     
                 this.removeSelecao(personagem)
             }
-        }*/
+        }
 
         return personagemLI
     }
 
 
-    /*adicionaSelecao = (personagem) => {
+    adicionaSelecao = (personagem) => {
         this.personagensSelecionados.push(personagem)
         this.render()
     }
-    
-    
+
+
     removeSelecao = (personagem) => {
         const indexDoPersonagemNoArray = this.personagensSelecionados.indexOf(personagem)
         this.personagensSelecionados.splice(indexDoPersonagemNoArray, 1)
         this.render()
     }
-    
+
     escutarEventoDuelo() {
         const botaoDuelar = document.querySelector('.botao-duelar')
-    
+
         botaoDuelar.addEventListener('click', () => {
             if (this.personagensSelecionados.length < 2) return mostrarModal('Selecione 2 personagens')
-    
+
             const resultadoDuelo = Personagem.verificarVencedor(this.personagensSelecionados[0], this.personagensSelecionados[1])
-    
+
             mostrarModal(resultadoDuelo)
-    
+
             this.personagensSelecionados.splice(0, this.personagensSelecionados.length)
-    
+
             this.render()
         })
-    }*/
+    }
 }
