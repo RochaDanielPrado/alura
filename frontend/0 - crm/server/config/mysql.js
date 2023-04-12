@@ -13,7 +13,7 @@ var pool = mysql.createPool({
 
 console.log(pool);
 
-/* exports.execute = (query, params=[]) => {
+exports.execute = (query, params=[]) => {
     return new Promise((resolve, reject) => {
         pool.query(query, params, (error, result, fields) => {
             if (error) {
@@ -25,4 +25,4 @@ console.log(pool);
     })
 }
 
-exports.pool = pool; */
+exports.pool = pool;

@@ -1,6 +1,13 @@
-var http = require('http')
-    ,app = require('./config/express');
+const dotenv = require('dotenv');
+dotenv.config();
 
-http.createServer(app).listen(3000, function() {
+console.log(process.env.MYSQL_USER);
+
+const http = require('http');
+const app = require('./config/express');
+const { Console } = require('console');
+const port = process.env.PORT || 3000;
+const server = http.createServer(app);
+server.listen(port, function() {
     console.log('Servidor escutando na porta: ' + this.address().port);
 });
