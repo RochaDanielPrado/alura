@@ -3,10 +3,13 @@ const db = require('../config/db');
 module.exports = {
     buscarTodos: () => {
         return new Promise((aceito, rejeitado)=>{
+            
+        const q = 'SELECT * FROM carros';
 
-            db.query('SELECT * FROM carros', (error, results)=>{
+            db.query(q, (error, data)=>{
                 if(error) { rejeitado(error); return; }
-                aceito(results);
+              
+                aceito(data);
             });
         });
     },
@@ -14,10 +17,10 @@ module.exports = {
     buscarUm: (codigo) => {
         return new Promise((aceito, rejeitado)=>{
 
-            db.query('SELECT * FROM carros WHERE codigo = ?', [codigo], (error, results) => {
+            db.query('SELECT * FROM carros WHERE codigo = ?', [codigo], (error, data) => {
                 if(error) { rejeitado(error); return; }
-                if(results.length > 0){ //vai verificar se retornou mais de 1 e pegar o 1
-                    aceito(results[0]);
+                if(data.length > 0){ //vai verificar se retornou mais de 1 e pegar o 1
+                    aceito(data[0]);
                 }else {
                     aceito(false);
                 }
@@ -29,9 +32,9 @@ module.exports = {
 
             db.query('INSERT INTO carros (modelo, placa) VALUES (?, ?)',
                 [modelo, placa],
-                (error, results)=>{
+                (error, data)=>{
                     if(error){ rejeitado(error); return; }
-                    aceito(results.insertCodigo); //insertId
+                    aceito(data.insertCodigo); //insertId
                 }
             );
         });
@@ -40,9 +43,9 @@ module.exports = {
         return new Promise((aceito, rejeitado)=> {
             db.query('UPDATE carros SET modelo = ?, placa = ? WHERE codigo = ?',
                 [modelo, placa, codigo],
-                (error, results) => {
+                (error, data) => {
                     if(error){ rejeitado(error); return; }
-                    aceito(results);
+                    aceito(data);
                 }
             );
         });
@@ -50,9 +53,9 @@ module.exports = {
 
     excluir: (codigo)=> {
         return new Promise((aceito, rejeitado)=> {
-            db.query('DELETE FROM carros WHERE codigo = ?',[codigo], (error, results ) =>{
+            db.query('DELETE FROM carros WHERE codigo = ?',[codigo], (error, data ) =>{
                 if(error){ rejeitado(error); return; }
-                aceito(results);
+                aceito(data);
             });
         });
     }
