@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Banner from './componentes/Banner';
-import CampoTexto from './componentes/CampoTexto';
 import Formulario from './componentes/Formulario';
 import Time from './componentes/Time';
 
@@ -60,7 +59,8 @@ function App() {
         <Time key={time.nome} 
         nome={time.nome} 
         corPrimaria={time.corPrimaria}
-        corSecundaria={time.corSecundaria}/>)}
+        corSecundaria={time.corSecundaria}
+        colaboradores={colaboradores}/>)}
       
     </div>
   );
