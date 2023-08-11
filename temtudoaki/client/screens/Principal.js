@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View , StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -12,11 +12,15 @@ import Cadastrar from './Cadastrar';
 const Tab = createBottomTabNavigator();
 
 export default function Principal() {
+
+  const stl = { iconColor: '#e91e63' }
+
   return (
     <Tab.Navigator
       initialRouteName="Busca"
-      tabBarOptions={{
-        activeTintColor: '#e91e63',
+      screenOptions={{
+        tabBarActiveTintColor: '#e91e63',
+        tabBarStyle: {backgroundColor: "yellow"},
       }}
     >
       <Tab.Screen
@@ -25,7 +29,7 @@ export default function Principal() {
         options={{
           tabBarLabel: 'Buscar',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account-search" color={color} size={size} />
+            <MaterialCommunityIcons name="account-search" color={stl.iconColor} size={size} />
           ),
         }}
       />
@@ -35,7 +39,7 @@ export default function Principal() {
         options={{
           tabBarLabel: 'Produtos',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="shopping" color={color} size={size} />
+            <MaterialCommunityIcons name="shopping" color={stl.iconColor} size={size} />
           ),
         }}
       />
@@ -45,7 +49,7 @@ export default function Principal() {
         options={{
           tabBarLabel: 'Serviços',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="human-greeting" color={color} size={size} />
+            <MaterialCommunityIcons name="human-greeting" color={stl.iconColor} size={size} />
           ),
         }}
       />
@@ -55,7 +59,7 @@ export default function Principal() {
         options={{
           tabBarLabel: 'Cadastrar',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="plus-circle" color={color} size={size} />
+            <MaterialCommunityIcons name="plus-circle" color={stl.iconColor} size={size} />
           ),
         }}
       />
@@ -65,7 +69,7 @@ export default function Principal() {
         options={{
           tabBarLabel: 'Perfil',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <MaterialCommunityIcons name="account" color={stl.iconColor} size={size} />
           ),
         }}
       />
