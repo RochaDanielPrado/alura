@@ -5,7 +5,7 @@ const typeorm_1 = require("typeorm");
 exports.databaseProviders = [
     {
         provide: 'DATABASE_CONNECTION',
-        useFactory: async () => await typeorm_1.createConnection({
+        useFactory: async () => await (0, typeorm_1.createConnection)({
             type: 'mysql',
             host: '162.241.61.183',
             port: 3306,

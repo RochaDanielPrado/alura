@@ -10,8 +10,8 @@ export declare class TokenService {
     private authService;
     constructor(tokenRepository: Repository<Token>, usuarioService: UsuarioService, authService: AuthService);
     save(hash: string, username: string): Promise<void>;
-    refreshToken(oldToken: string): Promise<HttpException | {
+    refreshToken(oldToken: string): Promise<{
         access_token: string;
-    }>;
+    } | HttpException>;
     getUsuarioByToken(token: string): Promise<Usuario>;
 }

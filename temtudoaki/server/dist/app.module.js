@@ -15,7 +15,7 @@ const servico_module_1 = require("./servico/servico.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [
             auth_module_1.AuthModule,
             servico_module_1.ServicoModule

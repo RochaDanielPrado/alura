@@ -1,1 +1,0 @@
-"# temtudaki_frontend" 

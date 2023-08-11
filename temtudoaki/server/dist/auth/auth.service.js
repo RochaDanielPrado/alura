@@ -62,7 +62,7 @@ let AuthService = class AuthService {
     }
 };
 AuthService = __decorate([
-    common_1.Injectable(),
+    (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [usuario_service_1.UsuarioService,
         jwt_1.JwtService,
         token_service_1.TokenService])

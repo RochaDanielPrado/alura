@@ -24,14 +24,14 @@ let TokenController = class TokenController {
     }
 };
 __decorate([
-    common_1.Put('refresh'),
-    __param(0, common_1.Body()),
+    (0, common_1.Put)('refresh'),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], TokenController.prototype, "refreshToken", null);
 TokenController = __decorate([
-    common_1.Controller('token'),
+    (0, common_1.Controller)('token'),
     __metadata("design:paramtypes", [token_service_1.TokenService])
 ], TokenController);
 exports.TokenController = TokenController;

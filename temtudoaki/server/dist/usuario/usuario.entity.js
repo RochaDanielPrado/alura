@@ -15,35 +15,35 @@ const typeorm_1 = require("typeorm");
 let Usuario = class Usuario {
 };
 __decorate([
-    typeorm_1.PrimaryGeneratedColumn(),
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], Usuario.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({ length: 100 }),
+    (0, typeorm_1.Column)({ length: 100 }),
     __metadata("design:type", String)
 ], Usuario.prototype, "nome", void 0);
 __decorate([
-    typeorm_1.Column({ length: 100 }),
+    (0, typeorm_1.Column)({ length: 100 }),
     __metadata("design:type", String)
 ], Usuario.prototype, "email", void 0);
 __decorate([
-    typeorm_1.Column({ length: 255 }),
+    (0, typeorm_1.Column)({ length: 255 }),
     __metadata("design:type", String)
 ], Usuario.prototype, "password", void 0);
 __decorate([
-    typeorm_1.Column({ length: 15 }),
+    (0, typeorm_1.Column)({ length: 15 }),
     __metadata("design:type", String)
 ], Usuario.prototype, "telefone", void 0);
 __decorate([
-    typeorm_1.Column({ length: 14 }),
+    (0, typeorm_1.Column)({ length: 14 }),
     __metadata("design:type", String)
 ], Usuario.prototype, "cpf", void 0);
 __decorate([
-    typeorm_1.OneToMany(() => servico_entity_1.Servico, servico => servico.usuario),
+    (0, typeorm_1.OneToMany)(() => servico_entity_1.Servico, servico => servico.usuario),
     __metadata("design:type", Array)
 ], Usuario.prototype, "servicos", void 0);
 Usuario = __decorate([
-    typeorm_1.Entity()
+    (0, typeorm_1.Entity)()
 ], Usuario);
 exports.Usuario = Usuario;
 //# sourceMappingURL=usuario.entity.js.map

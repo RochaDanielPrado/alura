@@ -11,7 +11,7 @@ export declare class AuthService {
     login(user: any): Promise<{
         access_token: string;
     }>;
-    loginToken(token: string): Promise<HttpException | {
+    loginToken(token: string): Promise<{
         access_token: string;
-    }>;
+    } | HttpException>;
 }

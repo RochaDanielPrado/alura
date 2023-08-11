@@ -39,15 +39,16 @@ let ServicoController = class ServicoController {
     }
 };
 __decorate([
-    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Post('cadastrar'),
-    __param(0, common_1.Body()), __param(1, common_1.Req()),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Post)('cadastrar'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], ServicoController.prototype, "cadastrar", null);
 ServicoController = __decorate([
-    common_1.Controller('servico'),
+    (0, common_1.Controller)('servico'),
     __metadata("design:paramtypes", [servico_service_1.ServicoService,
         token_service_1.TokenService])
 ], ServicoController);

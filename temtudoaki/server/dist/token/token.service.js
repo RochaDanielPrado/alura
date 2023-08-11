@@ -26,7 +26,7 @@ let TokenService = class TokenService {
         this.authService = authService;
     }
     async save(hash, username) {
-        let objToken = await this.tokenRepository.findOne({ username: username });
+        let objToken = await this.tokenRepository.findOneBy({ username: username });
         if (objToken) {
             this.tokenRepository.update(objToken.id, {
                 hash: hash
@@ -40,7 +40,7 @@ let TokenService = class TokenService {
         }
     }
     async refreshToken(oldToken) {
-        let objToken = await this.tokenRepository.findOne({ hash: oldToken });
+        let objToken = await this.tokenRepository.findOneBy({ hash: oldToken });
         if (objToken) {
             let usuario = await this.usuarioService.findOne(objToken.username);
             return this.authService.login(usuario);
@@ -53,7 +53,7 @@ let TokenService = class TokenService {
     }
     async getUsuarioByToken(token) {
         token = token.replace("Bearer ", "").trim();
-        let objToken = await this.tokenRepository.findOne({ hash: token });
+        let objToken = await this.tokenRepository.findOneBy({ hash: token });
         if (objToken) {
             let usuario = await this.usuarioService.findOne(objToken.username);
             return usuario;
@@ -64,9 +64,9 @@ let TokenService = class TokenService {
     }
 };
 TokenService = __decorate([
-    common_1.Injectable(),
-    __param(0, common_1.Inject('TOKEN_REPOSITORY')),
-    __param(2, common_1.Inject(common_1.forwardRef(() => auth_service_1.AuthService))),
+    (0, common_1.Injectable)(),
+    __param(0, (0, common_1.Inject)('TOKEN_REPOSITORY')),
+    __param(2, (0, common_1.Inject)((0, common_1.forwardRef)(() => auth_service_1.AuthService))),
     __metadata("design:paramtypes", [typeorm_1.Repository,
         usuario_service_1.UsuarioService,
         auth_service_1.AuthService])

@@ -17,7 +17,7 @@ const servico_service_1 = require("./servico.service");
 let ServicoModule = class ServicoModule {
 };
 ServicoModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [database_module_1.DatabaseModule, token_module_1.TokenModule],
         controllers: [servico_controller_1.ServicoController],
         providers: [

@@ -41,8 +41,8 @@ let ServicoService = class ServicoService {
     }
 };
 ServicoService = __decorate([
-    common_1.Injectable(),
-    __param(0, common_1.Inject('SERVICO_REPOSITORY')),
+    (0, common_1.Injectable)(),
+    __param(0, (0, common_1.Inject)('SERVICO_REPOSITORY')),
     __metadata("design:paramtypes", [typeorm_1.Repository])
 ], ServicoService);
 exports.ServicoService = ServicoService;

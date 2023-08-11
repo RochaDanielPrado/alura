@@ -16,8 +16,8 @@ const usuario_service_1 = require("./usuario.service");
 let UsuarioModule = class UsuarioModule {
 };
 UsuarioModule = __decorate([
-    common_1.Module({
-        imports: [database_module_1.DatabaseModule, common_1.forwardRef(() => auth_module_1.AuthModule)],
+    (0, common_1.Module)({
+        imports: [database_module_1.DatabaseModule, (0, common_1.forwardRef)(() => auth_module_1.AuthModule)],
         controllers: [usuario_controller_1.UsuarioController],
         providers: [
             ...usuario_providers_1.usuarioProviders,

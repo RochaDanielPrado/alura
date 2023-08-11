@@ -14,19 +14,19 @@ const typeorm_1 = require("typeorm");
 let Token = class Token {
 };
 __decorate([
-    typeorm_1.PrimaryGeneratedColumn(),
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], Token.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({ length: 255 }),
+    (0, typeorm_1.Column)({ length: 255 }),
     __metadata("design:type", String)
 ], Token.prototype, "hash", void 0);
 __decorate([
-    typeorm_1.Column({ length: 100 }),
+    (0, typeorm_1.Column)({ length: 100 }),
     __metadata("design:type", String)
 ], Token.prototype, "username", void 0);
 Token = __decorate([
-    typeorm_1.Entity()
+    (0, typeorm_1.Entity)()
 ], Token);
 exports.Token = Token;
 //# sourceMappingURL=token.entity.js.map

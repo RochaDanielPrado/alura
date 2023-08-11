@@ -17,8 +17,8 @@ const token_service_1 = require("./token.service");
 let TokenModule = class TokenModule {
 };
 TokenModule = __decorate([
-    common_1.Module({
-        imports: [database_module_1.DatabaseModule, common_1.forwardRef(() => auth_module_1.AuthModule), usuario_module_1.UsuarioModule],
+    (0, common_1.Module)({
+        imports: [database_module_1.DatabaseModule, (0, common_1.forwardRef)(() => auth_module_1.AuthModule), usuario_module_1.UsuarioModule],
         controllers: [token_controller_1.TokenController],
         providers: [
             ...token_providers_1.tokenProviders,

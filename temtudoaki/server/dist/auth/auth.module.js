@@ -19,7 +19,7 @@ const local_strategy_1 = require("./local.strategy");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
-    common_1.Module({
+    (0, common_1.Module)({
         imports: [usuario_module_1.UsuarioModule, passport_1.PassportModule, token_module_1.TokenModule,
             jwt_1.JwtModule.register({
                 secret: constants_1.jwtConstants.secret,

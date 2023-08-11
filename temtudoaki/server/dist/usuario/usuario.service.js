@@ -47,12 +47,12 @@ let UsuarioService = class UsuarioService {
         });
     }
     async findOne(email) {
-        return this.usuarioRepository.findOne({ email: email });
+        return this.usuarioRepository.findOneBy({ email: email });
     }
 };
 UsuarioService = __decorate([
-    common_1.Injectable(),
-    __param(0, common_1.Inject('USUARIO_REPOSITORY')),
+    (0, common_1.Injectable)(),
+    __param(0, (0, common_1.Inject)('USUARIO_REPOSITORY')),
     __metadata("design:paramtypes", [typeorm_1.Repository])
 ], UsuarioService);
 exports.UsuarioService = UsuarioService;

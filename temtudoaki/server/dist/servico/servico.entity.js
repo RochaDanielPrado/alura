@@ -15,23 +15,23 @@ const typeorm_1 = require("typeorm");
 let Servico = class Servico {
 };
 __decorate([
-    typeorm_1.PrimaryGeneratedColumn(),
+    (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
 ], Servico.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column({ length: 200 }),
+    (0, typeorm_1.Column)({ length: 200 }),
     __metadata("design:type", String)
 ], Servico.prototype, "titulo", void 0);
 __decorate([
-    typeorm_1.Column({ length: 255 }),
+    (0, typeorm_1.Column)({ length: 255 }),
     __metadata("design:type", String)
 ], Servico.prototype, "descricao", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => usuario_entity_1.Usuario, usuario => usuario.servicos),
+    (0, typeorm_1.ManyToOne)(() => usuario_entity_1.Usuario, usuario => usuario.servicos),
     __metadata("design:type", usuario_entity_1.Usuario)
 ], Servico.prototype, "usuario", void 0);
 Servico = __decorate([
-    typeorm_1.Entity()
+    (0, typeorm_1.Entity)()
 ], Servico);
 exports.Servico = Servico;
 //# sourceMappingURL=servico.entity.js.map
