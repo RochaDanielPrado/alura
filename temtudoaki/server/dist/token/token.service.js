@@ -14,62 +14,65 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TokenService = void 0;
 const common_1 = require("@nestjs/common");
-const resultado_dto_1 = require("../dto/resultado.dto");
-const typeorm_1 = require("typeorm");
-const usuario_service_1 = require("../usuario/usuario.service");
 const auth_service_1 = require("../auth/auth.service");
-const usuario_entity_1 = require("../usuario/usuario.entity");
-let TokenService = class TokenService {
-    constructor(tokenRepository, usuarioService, authService) {
+const typeorm_1 = require("typeorm");
+const token_entidy_1 = require("./token.entidy");
+const users_service_1 = require("../users/users.service");
+const typeorm_2 = require("@nestjs/typeorm");
+let TokenService = exports.TokenService = class TokenService {
+    constructor(tokenRepository, userService, authService) {
         this.tokenRepository = tokenRepository;
-        this.usuarioService = usuarioService;
+        this.userService = userService;
         this.authService = authService;
     }
-    async save(hash, username) {
+    async save(hash, username, userid) {
         let objToken = await this.tokenRepository.findOneBy({ username: username });
         if (objToken) {
             this.tokenRepository.update(objToken.id, {
-                hash: hash
+                hash: hash,
             });
         }
         else {
             this.tokenRepository.insert({
                 hash: hash,
-                username: username
+                username: username,
+                userid: userid,
             });
         }
     }
     async refreshToken(oldToken) {
         let objToken = await this.tokenRepository.findOneBy({ hash: oldToken });
         if (objToken) {
-            let usuario = await this.usuarioService.findOne(objToken.username);
-            return this.authService.login(usuario);
+            let user = await this.userService.findOne(objToken.username);
+            return this.authService.login(user);
         }
         else {
             return new common_1.HttpException({
-                errorMessage: 'Token inválido'
+                errorMessage: 'Token inválido',
             }, common_1.HttpStatus.UNAUTHORIZED);
         }
     }
     async getUsuarioByToken(token) {
-        token = token.replace("Bearer ", "").trim();
+        token = token.replace('Bearer ', '').trim();
         let objToken = await this.tokenRepository.findOneBy({ hash: token });
         if (objToken) {
-            let usuario = await this.usuarioService.findOne(objToken.username);
-            return usuario;
+            let user = await this.userService.findOne(objToken.username);
+            return user;
         }
         else {
             return null;
         }
     }
+    findAll() {
+        return this.tokenRepository.find();
+    }
 };
-TokenService = __decorate([
+exports.TokenService = TokenService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, common_1.Inject)('TOKEN_REPOSITORY')),
+    __param(0, (0, typeorm_2.InjectRepository)(token_entidy_1.TokenEntity)),
     __param(2, (0, common_1.Inject)((0, common_1.forwardRef)(() => auth_service_1.AuthService))),
     __metadata("design:paramtypes", [typeorm_1.Repository,
-        usuario_service_1.UsuarioService,
+        users_service_1.UsersService,
         auth_service_1.AuthService])
 ], TokenService);
-exports.TokenService = TokenService;
 //# sourceMappingURL=token.service.js.map

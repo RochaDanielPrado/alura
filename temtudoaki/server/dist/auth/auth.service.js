@@ -8,64 +8,56 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const usuario_service_1 = require("../usuario/usuario.service");
-const bcrypt = require("bcrypt");
+const users_service_1 = require("../users/users.service");
 const jwt_1 = require("@nestjs/jwt");
+const bcrypt_1 = require("bcrypt");
 const token_service_1 = require("../token/token.service");
-const usuario_entity_1 = require("../usuario/usuario.entity");
-let AuthService = class AuthService {
-    constructor(usuarioService, jwtService, tokenService) {
-        this.usuarioService = usuarioService;
+let AuthService = exports.AuthService = class AuthService {
+    constructor(userService, jwtService, tokenService) {
+        this.userService = userService;
         this.jwtService = jwtService;
         this.tokenService = tokenService;
     }
-    async validarUsuario(email, senha) {
-        const usuario = await this.usuarioService.findOne(email);
-        if (usuario && bcrypt.compareSync(senha, usuario.password)) {
-            const { password } = usuario, result = __rest(usuario, ["password"]);
-            return result;
+    async validateUser(email, password) {
+        let user;
+        try {
+            user = await this.userService.findOne(email);
         }
-        return null;
+        catch (error) {
+            return null;
+        }
+        const isPasswordValid = (0, bcrypt_1.compareSync)(password, user.password);
+        if (!isPasswordValid)
+            return null;
+        return user;
     }
     async login(user) {
         const payload = { username: user.email, sub: user.id };
         const token = this.jwtService.sign(payload);
-        this.tokenService.save(token, user.email);
+        this.tokenService.save(token, user.email, user.id);
         return {
-            access_token: token
+            access_token: token,
         };
     }
     async loginToken(token) {
-        let usuario = await this.tokenService.getUsuarioByToken(token);
-        if (usuario) {
-            return this.login(usuario);
+        const user = await this.tokenService.getUsuarioByToken(token);
+        if (user) {
+            return this.login(user);
         }
         else {
             return new common_1.HttpException({
-                errorMessage: 'Token inválido'
+                errorMessage: 'Token inválido',
             }, common_1.HttpStatus.UNAUTHORIZED);
         }
     }
 };
-AuthService = __decorate([
+exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [usuario_service_1.UsuarioService,
+    __metadata("design:paramtypes", [users_service_1.UsersService,
         jwt_1.JwtService,
         token_service_1.TokenService])
 ], AuthService);
-exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

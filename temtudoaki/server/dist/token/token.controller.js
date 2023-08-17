@@ -15,12 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TokenController = void 0;
 const common_1 = require("@nestjs/common");
 const token_service_1 = require("./token.service");
-let TokenController = class TokenController {
+let TokenController = exports.TokenController = class TokenController {
     constructor(tokenService) {
         this.tokenService = tokenService;
     }
     async refreshToken(data) {
         return this.tokenService.refreshToken(data.oldToken);
+    }
+    async listar() {
+        return this.tokenService.findAll();
     }
 };
 __decorate([
@@ -30,9 +33,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], TokenController.prototype, "refreshToken", null);
-TokenController = __decorate([
+__decorate([
+    (0, common_1.Get)('listar'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], TokenController.prototype, "listar", null);
+exports.TokenController = TokenController = __decorate([
     (0, common_1.Controller)('token'),
     __metadata("design:paramtypes", [token_service_1.TokenService])
 ], TokenController);
-exports.TokenController = TokenController;
 //# sourceMappingURL=token.controller.js.map

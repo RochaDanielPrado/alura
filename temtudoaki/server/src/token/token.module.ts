@@ -1,18 +1,19 @@
-import { forwardRef, Module } from '@nestjs/common';
-import { AuthModule } from 'src/auth/auth.module';
-import { UsuarioModule } from 'src/usuario/usuario.module';
-import { DatabaseModule } from '../database/database.module';
+import { Module, forwardRef } from '@nestjs/common';
 import { TokenController } from './token.controller';
-import { tokenProviders } from './token.providers';
 import { TokenService } from './token.service';
+import { AuthModule } from 'src/auth/auth.module';
+import { UsersModule } from 'src/users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TokenEntity } from './token.entidy';
 
 @Module({
-  imports: [DatabaseModule, forwardRef(() => AuthModule), UsuarioModule],
-  controllers: [TokenController],
-  providers: [
-    ...tokenProviders,
-    TokenService,
+  imports: [
+    TypeOrmModule.forFeature([TokenEntity]),
+    forwardRef(() => AuthModule), 
+    forwardRef(() => UsersModule),
   ],
-  exports: [TokenService]
+  controllers: [TokenController],
+  providers: [TokenService],
+  exports: [TokenService],
 })
 export class TokenModule {}

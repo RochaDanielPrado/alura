@@ -1,56 +1,65 @@
-import { Injectable, Inject, HttpException, HttpStatus, forwardRef } from '@nestjs/common';
-import { ResultadoDto } from 'src/dto/resultado.dto';
-import { Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
-import { Token } from './token.entity';
-import { UsuarioService } from 'src/usuario/usuario.service';
+import { HttpException, HttpStatus, Inject, Injectable, forwardRef } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
-import { Usuario } from 'src/usuario/usuario.entity';
+import { Repository } from 'typeorm';
+import { TokenEntity } from './token.entidy';
+import { UsersService } from 'src/users/users.service';
+import { UserEntity } from 'src/users/users.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TokenService {
   constructor(
-    @Inject('TOKEN_REPOSITORY')
-    private tokenRepository: Repository<Token>,
-    private usuarioService: UsuarioService,
+    @InjectRepository(TokenEntity)
+    private tokenRepository: Repository<TokenEntity>,
+    private userService: UsersService,
     @Inject(forwardRef(() => AuthService))
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
-  async save(hash: string, username: string){
-    let objToken = await this.tokenRepository.findOneBy({username: username})
-    if (objToken){
+  async save(hash: string, username: string, userid: number) {
+    let objToken = await this.tokenRepository.findOneBy({ username: username });
+    if (objToken) {
       this.tokenRepository.update(objToken.id, {
-        hash: hash
-      })
-    }else{
+        hash: hash,
+      });
+    } else {
       this.tokenRepository.insert({
         hash: hash,
-        username: username
-      })
+        username: username,
+        userid: userid,
+      });
     }
   }
 
-  async refreshToken(oldToken: string){
-    let objToken = await this.tokenRepository.findOneBy({ hash: oldToken })
-    if (objToken){
-      let usuario = await this.usuarioService.findOne(objToken.username)      
-      return this.authService.login(usuario)
-    }else{ //é uma requisição inválida
-      return new HttpException({
-        errorMessage: 'Token inválido'
-      }, HttpStatus.UNAUTHORIZED)
+  async refreshToken(oldToken: string) {
+    let objToken = await this.tokenRepository.findOneBy({ hash: oldToken });
+    if (objToken) {
+      let user = await this.userService.findOne(objToken.username);
+      return this.authService.login(user);
+    } else {
+      //é uma requisição inválida
+      return new HttpException(
+        {
+          errorMessage: 'Token inválido',
+        },
+        HttpStatus.UNAUTHORIZED,
+      );
     }
   }
 
-  async getUsuarioByToken(token: string): Promise<Usuario>{
-    token = token.replace("Bearer ","").trim()
-    let objToken: Token = await this.tokenRepository.findOneBy({hash: token})
-    if (objToken){
-      let usuario = await this.usuarioService.findOne(objToken.username)      
-      return usuario
-    }else{ //é uma requisição inválida
-      return null
+  async getUsuarioByToken(token: string): Promise<UserEntity> {
+    token = token.replace('Bearer ', '').trim();
+    let objToken: TokenEntity = await this.tokenRepository.findOneBy({ hash: token });
+    if (objToken) {
+      let user = await this.userService.findOne(objToken.username);
+      return user;
+    } else {
+      //é uma requisição inválida
+      return null;
     }
+  }
+
+  findAll(): Promise<TokenEntity[]> {
+    return this.tokenRepository.find();
   }
 }

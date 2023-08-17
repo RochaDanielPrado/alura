@@ -8,21 +8,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
+const config_1 = require("@nestjs/config");
+const typeorm_1 = require("@nestjs/typeorm");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const users_module_1 = require("./users/users.module");
 const auth_module_1 = require("./auth/auth.module");
-const servico_module_1 = require("./servico/servico.module");
-let AppModule = class AppModule {
+const token_module_1 = require("./token/token.module");
+let AppModule = exports.AppModule = class AppModule {
 };
-AppModule = __decorate([
+exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot(),
+            typeorm_1.TypeOrmModule.forRoot({
+                type: process.env.TYPEORM_CONNECTION,
+                host: process.env.TYPEORM_HOST,
+                port: process.env.TYPEORM_PORT,
+                username: process.env.TYPEORM_USERNAME,
+                password: process.env.TYPEORM_PASSWORD,
+                database: process.env.TYPEORM_DATABASE,
+                entities: [__dirname + '/**/*.entity{.js,.ts}'],
+                synchronize: true,
+            }),
+            users_module_1.UsersModule,
             auth_module_1.AuthModule,
-            servico_module_1.ServicoModule
+            token_module_1.TokenModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
 ], AppModule);
-exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map
