@@ -11,10 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const users_service_1 = require("../users/users.service");
+const users_service_1 = require("../app/users/users.service");
 const jwt_1 = require("@nestjs/jwt");
 const bcrypt_1 = require("bcrypt");
-const token_service_1 = require("../token/token.service");
+const token_service_1 = require("../app/token/token.service");
 let AuthService = exports.AuthService = class AuthService {
     constructor(userService, jwtService, tokenService) {
         this.userService = userService;

@@ -12,9 +12,9 @@ const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const users_module_1 = require("./users/users.module");
+const users_module_1 = require("./app/users/users.module");
 const auth_module_1 = require("./auth/auth.module");
-const token_module_1 = require("./token/token.module");
+const token_module_1 = require("./app/token/token.module");
 let AppModule = exports.AppModule = class AppModule {
 };
 exports.AppModule = AppModule = __decorate([

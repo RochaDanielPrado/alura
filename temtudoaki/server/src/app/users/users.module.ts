@@ -5,6 +5,7 @@ import { UsersController } from './users.controller';
 import { UserEntity } from './users.entity';
 import { AuthModule } from 'src/auth/auth.module';
 
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserEntity]),

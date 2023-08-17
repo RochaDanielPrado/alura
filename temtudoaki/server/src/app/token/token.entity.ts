@@ -4,8 +4,8 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity({ name: 'token' })
 export class TokenEntity {
 
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @IsNotEmpty()
   @Column({ length: 255 })
@@ -17,5 +17,5 @@ export class TokenEntity {
 
   @IsNotEmpty()
   @Column()
-  userid: number;
+  userid: string;
 }
