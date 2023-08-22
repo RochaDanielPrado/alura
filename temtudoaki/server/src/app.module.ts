@@ -3,9 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './app/users/users.module';
+import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { TokenModule } from './app/token/token.module';
+import { TokenModule } from './token/token.module';
+import { Sb1Module } from './app/sb1/sb1.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TokenModule } from './app/token/token.module';
     UsersModule,
     AuthModule,
     TokenModule,
+    Sb1Module,
   ],
   controllers: [AppController],
   providers: [AppService],

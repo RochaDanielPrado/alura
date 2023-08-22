@@ -18,12 +18,12 @@ export default function CadastroServico() {
     let error = false
     setErrorTitulo(null)
     setErrorDescricao(null)
-    
-    if (titulo.length < 5){
+
+    if (titulo.length < 5) {
       setErrorTitulo("Digite pelo menos 5 letras no título")
       error = true
     }
-    if (descricao.length < 20){
+    if (descricao.length < 20) {
       setErrorDescricao("Digite pelo menos 20 letras na descrição")
       error = true
     }
@@ -32,89 +32,89 @@ export default function CadastroServico() {
   }
 
   const salvar = () => {
-    if (validar()){
+    if (validar()) {
       setLoading(true)
-      
+
       let data = {
         titulo: titulo,
-        descricao: descricao        
+        descricao: descricao
       }
-      
+
       servicoService.cadastrar(data)
-      .then((response) => {
-        setLoading(false)
-        Alert.alert(response.data.mensagem)
-        setTitulo(null)
-        setDescricao(null)
-      })
-      .catch((error) => {
-        setLoading(false)
-        Alert.alert("Erro", "Houve um erro inesperado")
-      })
+        .then((response) => {
+          setLoading(false)
+          Alert.alert(response.data.mensagem)
+          setTitulo(null)
+          setDescricao(null)
+        })
+        .catch((error) => {
+          setLoading(false)
+          Alert.alert("Erro", "Houve um erro inesperado")
+        })
     }
   }
 
-    return (
-      <KeyboardAvoidingView
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
-        style={[styles.container]}
-        keyboardVerticalOffset={80}>
-      <ScrollView style={{width: "100%"}}>
-      <Text h3>Cadastre-se</Text>
-      
-      <Input
-        placeholder="Título do serviço"
-        onChangeText={value => {
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      style={[styles.container]}
+      keyboardVerticalOffset={80}>
+      <ScrollView style={{ width: "100%" }}>
+        <Text h3>Cadastre-se</Text>
+
+        <Input
+          placeholder="Título do serviço"
+          onChangeText={value => {
             setTitulo(value)
             setErrorTitulo(null)
-        }}
-        errorMessage={errorTitulo}        
+          }}
+          errorMessage={errorTitulo}
         />
-      
-      <Input
-        placeholder="Descreva o serviço para explicar melhor"
-        onChangeText={value => {
+
+        <Input
+          placeholder="Descreva o serviço para explicar melhor"
+          onChangeText={value => {
             setDescricao(value)
             setErrorDescricao(null)
-        }}
-        errorMessage={errorDescricao}        
+          }}
+          errorMessage={errorDescricao}
         />
 
-    { isLoading && 
-      <Text>Carregando...</Text>
-    }
-
-    { !isLoading && 
-      <>
-      <Button
-        icon={
-          <Icon
-            name="check"
-            size={15}
-            color="white"
-          />
+        {isLoading &&
+          <Text>Carregando...</Text>
         }
-        title="Salvar"
-        buttonStyle={styles.button}
-        onPress={() => salvar()}
-      />
 
-      <Button
-        icon={
-          <Icon
-            name="stop"
-            size={15}
-            color="white"
-          />
+        {!isLoading &&
+          <>
+            <Button
+              icon={
+                <Icon
+                  name="check"
+                  size={15}
+                  color="white"
+                />
+              }
+              title="Salvar"
+              buttonStyle={styles.button}
+              onPress={() => salvar()}
+            />
+
+            <Button
+              icon={
+                <Icon
+                  name="stop"
+                  size={15}
+                  color="white"
+                />
+              }
+              title="Cancelar"
+              buttonStyle={[styles.button, styles.cancelButton]}
+              onPress={() => cancelar()}
+            />
+          </>
         }
-        title="Cancelar"
-        buttonStyle={[styles.button, styles.cancelButton]}
-        onPress={() => cancelar()}
-      />
-      </>
-    }
 
       </ScrollView>
-      </KeyboardAvoidingView>
-    );
-  }
+    </KeyboardAvoidingView>
+  );
+}

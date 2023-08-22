@@ -2,8 +2,8 @@ import { HttpException, HttpStatus, Inject, Injectable, forwardRef } from '@nest
 import { AuthService } from 'src/auth/auth.service';
 import { Repository } from 'typeorm';
 import { TokenEntity } from './token.entity';
-import { UsersService } from 'src/app/users/users.service';
-import { UserEntity } from 'src/app/users/users.entity';
+import { UsersService } from 'src/users/users.service';
+import { UserEntity } from 'src/users/users.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class TokenService {
     private authService: AuthService,
   ) {}
 
-  async save(hash: string, username: string, userid: string) {
+  async save(hash: string, username: string, userid: number) {
     let objToken = await this.tokenRepository.findOneBy({ username: username });
     if (objToken) {
       this.tokenRepository.update(objToken.id, {

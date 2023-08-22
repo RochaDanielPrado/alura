@@ -1,8 +1,8 @@
 import { HttpException } from '@nestjs/common';
-import { UsersService } from '../app/users/users.service';
-import { UserEntity } from 'src/app/users/users.entity';
+import { UsersService } from '../users/users.service';
+import { UserEntity } from 'src/users/users.entity';
 import { JwtService } from '@nestjs/jwt';
-import { TokenService } from 'src/app/token/token.service';
+import { TokenService } from 'src/token/token.service';
 export declare class AuthService {
     private readonly userService;
     private readonly jwtService;

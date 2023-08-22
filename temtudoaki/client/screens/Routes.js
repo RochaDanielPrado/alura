@@ -4,27 +4,39 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { generalSettings } from '../util/Colors';
 
-import Perfil from './Perfil';
-import Buscar from './Buscar';
-import Produtos from './Produtos';
-import Servicos from './Servicos';
-import Cadastrar from './Cadastrar';
+
+import {Buscar, Produtos, Servicos, Cadastrar, Perfil} from './index';
+
 
 const Tab = createBottomTabNavigator();
 
-export default function Principal() {
+export default function Routes() {
 
   const stl = { iconColor: '#e91e63' }
 
+  const screenOptions = {
+    tabBarShowLabel: true,
+    headerShow: false,
+    tabBarActiveTintColor: generalSettings.buttonColor,
+    tabBarStyle: {
+      position: 'absolute',
+      botton: 0,
+      rigth: 0,
+      left: 0,
+      elevation: 0,
+      //height: 60,
+      backgroundColor: generalSettings.primaryColor, 
+      borderTopWidth: '2', 
+      borderTopColor: generalSettings.buttonColor,
+    },
+  }
+
   return (
+  
     <Tab.Navigator
        initialRouteName="Buscar"
-      screenOptions={{
-        tabBarActiveTintColor: generalSettings.buttonColor,
-        tabBarStyle: {backgroundColor: generalSettings.primaryColor, borderTopWidth: '2', borderTopColor: generalSettings.buttonColor},
-      }
-    }
-    >
+      screenOptions={screenOptions}>
+
       <Tab.Screen
         name="Buscar"
         component={Buscar}
@@ -76,5 +88,6 @@ export default function Principal() {
         }}
       />
     </Tab.Navigator>
+  
   );
 }
