@@ -6,12 +6,12 @@ import { generalSettings } from '../util/Colors';
 import Header from '../components/Header';
 
 
-import { Buscar, Produtos, Servicos, Cadastrar, Perfil } from './index';
+import { Buscar, Produtos, Servicos, Cadastrar, Perfil } from '../util/AllScreens';
 
 
 const Tab = createBottomTabNavigator();
 
-export default function Routes() {
+export default function TabRoutes() {
 
   const screenOptions = {
     tabBarShowLabel: true,
@@ -33,9 +33,6 @@ export default function Routes() {
   };
 
   return (
-    <>
-      {/* <Header /> */}
-
       <Tab.Navigator
         initialRouteName="Buscar"
         screenOptions={screenOptions}>
@@ -92,7 +89,6 @@ export default function Routes() {
         />
 
       </Tab.Navigator>
-    </>
   );
 }
 

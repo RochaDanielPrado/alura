@@ -29,7 +29,7 @@ export default function Login({ navigation }) {
         setLoading(false)
         navigation.reset({
           index: 0,
-          routes: [{ name: "Teste" }]
+          routes: [{ name: "Principal" }]
         })
       })
       .catch((error) => {
