@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import styles from './style/MainStyle';
+import styles from './src/style/MainStyle';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import Login from './screens/Login';
-import Routes from './screens/Routes';
-import Principal from './screens/Principal';
-import Teste from './screens/Routes';
-import Cadastro from './screens/Cadastro';
-import CadastroProduto from './screens/CadastroProduto';
-import CadastroServico from './screens/CadastroServico';
+import Login from './src/screens/Login';
+import Routes from './src/screens/Routes';
+import Principal from './src/screens/Principal';
+import Teste from './src/screens/Routes';
+import Cadastro from './src/screens/Cadastro';
+import CadastroProduto from './src/screens/CadastroProduto';
+import CadastroServico from './src/screens/CadastroServico';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Config from './util/Config';
+import Config from './src/util/Config';
 
 
 const Stack = createStackNavigator();
