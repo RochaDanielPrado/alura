@@ -20,7 +20,7 @@ export default function Perfil({navigation}) {
     }
 
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'yellow'  }}>
         <Text>Profile!</Text>
         <Button
             icon={

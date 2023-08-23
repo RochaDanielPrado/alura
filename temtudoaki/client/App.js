@@ -6,6 +6,7 @@ import styles from './style/MainStyle';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Login from './screens/Login';
+import Routes from './screens/Routes';
 import Principal from './screens/Principal';
 import Teste from './screens/Routes';
 import Cadastro from './screens/Cadastro';
@@ -14,22 +15,21 @@ import CadastroServico from './screens/CadastroServico';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Config from './util/Config';
-import Routes from './screens/Routes';
+
 
 const Stack = createStackNavigator();
 
 function MyStack() {
   return (
     
-      <Routes/>
-   
-    // <Stack.Navigator>
-    //   <Stack.Screen name="Login" component={Login} />
-    //   <Stack.Screen name="Teste" component={Teste} />
-    //   <Stack.Screen name="Cadastro" component={Cadastro} />
-    //   <Stack.Screen name="CadastroProduto" component={CadastroProduto} />
-    //   <Stack.Screen name="CadastroServico" component={CadastroServico} />
-    // </Stack.Navigator>
+     
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Teste" component={Teste} />
+      <Stack.Screen name="Cadastro" component={Cadastro} />
+      <Stack.Screen name="CadastroProduto" component={CadastroProduto} />
+      <Stack.Screen name="CadastroServico" component={CadastroServico} />
+    </Stack.Navigator>
   );
 }
 

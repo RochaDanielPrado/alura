@@ -14,7 +14,7 @@ export default function Cadastrar({navigation}) {
     }
 
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center',  backgroundColor: 'green'  }}>
         <Text>O que você quer cadastrar?</Text>
         <Button
             icon={
