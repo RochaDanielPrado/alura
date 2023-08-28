@@ -20,6 +20,9 @@ export class UserEntity {
   @Column({ length: 100 })
   name: string;
 
+  @Column({ length: 100 })
+  lastname: string;
+
   @Column({ length: 100, unique: true })
   email: string;
 
@@ -29,9 +32,7 @@ export class UserEntity {
   @Column({ length: 15 })
   phone: string;
 
-  @Column({ length: 14 })
-  cpf: string;
-
+ 
   // @OneToMany(() => Servico, servico => servico.usuario)
   // services: Service[];
 

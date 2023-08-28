@@ -4,7 +4,7 @@ import Config from "../util/Config"
 
 class UsuarioService{
     
-    async cadastrar(data){
+    async newUser(data){
         return axios({
             url: Config.API_URL + "users/cadastrar",
             method: "POST",

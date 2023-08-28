@@ -1,11 +1,12 @@
+import 'react-native-gesture-handler';
 import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from '@react-navigation/native';
 
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import StackRoutes from './src/routes/stack.routes';
 import Config from './src/util/Config';
-import TabRoutes from './src/routes/TabRoutes';
-import { NavigationContainer } from '@react-navigation/native';
-import StackRoutes from './src/routes/StackRoutes';
+
 
 
 function defineInterceptor() {
@@ -37,10 +38,12 @@ export default function App() {
   defineInterceptor()
 
   return (
+
     <NavigationContainer>
-
-      <StackRoutes />
-
+        
+        <StackRoutes />
+       
     </NavigationContainer>
+
   );
 }

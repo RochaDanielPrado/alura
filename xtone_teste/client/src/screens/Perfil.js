@@ -11,7 +11,7 @@ export default function Perfil({navigation}) {
         AsyncStorage.setItem("TOKEN","").then(() => {
             navigation.reset({
                 index: 0,
-                routes: [{name: "Login"}]
+                routes: [{name: "SignIn"}]
             })
         }).catch((error) => {
             console.log(error)

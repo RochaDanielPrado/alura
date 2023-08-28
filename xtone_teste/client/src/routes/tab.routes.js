@@ -15,8 +15,7 @@ export default function TabRoutes() {
 
   const screenOptions = {
     tabBarShowLabel: true,
-    headerTitle: '', // some com o texto default da pagina
-    headerShown: true,
+    headerShown: false,
     headerTitleAlign: 'left',
     headerTransparent: false,
     headerBackground: () => (

@@ -7,6 +7,9 @@ export class CreateUserDto {
   name: string;
 
   @IsNotEmpty()
+  lastname: string;
+
+  @IsNotEmpty()
   @IsEmail()
   email: string;
 
@@ -17,6 +20,4 @@ export class CreateUserDto {
   @IsAlphanumeric()
   phone: string;
 
-  @IsAlphanumeric()
-  cpf: string;
 }

@@ -5,8 +5,9 @@ const {width, height} = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
     button: {
-      width: "100%",
-      marginTop: 10
+      width: width * 0.8,
+      marginTop: 10,
+      borderRadius:5,
     },  
     cancelButton: {
       backgroundColor: "#c00"
@@ -20,6 +21,14 @@ const styles = StyleSheet.create({
       // overflow: 'hidden',
       // backgroundColor: 'blue',
     },
+
+    input: {
+      backgroundColor: generalSettings.fontColor,
+      paddingLeft: 10,
+      borderRadius: 5,
+  
+    },
+
     maskedInput: {
       flexGrow: 1,
       height: 40,
@@ -27,13 +36,18 @@ const styles = StyleSheet.create({
       borderBottomColor: "#999",
       borderBottomWidth: 1,
       borderStyle: "solid",
-      alignSelf: "flex-start"
+      alignSelf: "flex-start",
+      color: generalSettings.primaryColor,
+    
     },
     containerMask: {
       flexDirection: "row",
-      marginBottom: 5,
+      marginBottom: 25,
       marginLeft: 10,
-      marginRight: 10
+      marginRight: 10,
+      backgroundColor: generalSettings.fontColor,
+      paddingLeft: 10,
+      borderRadius: 5,
     },
     errorMessage: {
       alignSelf: "flex-start",
