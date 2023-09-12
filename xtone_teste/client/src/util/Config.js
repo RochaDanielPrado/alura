@@ -1,5 +1,5 @@
 const Config = {
-    API_URL: "http://192.168.15.16:3000/",
+    API_URL: "http://10.50.0.51:3000/",
     TIMEOUT_REQUEST: 5000,
     HEADER_REQUEST: {
         Accept: 'application/json'

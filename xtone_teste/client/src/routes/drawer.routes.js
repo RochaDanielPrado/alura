@@ -13,7 +13,7 @@ export default function DrawerRoutes() {
 
     <Drawer.Navigator screenOptions={{ title: ''}}>
       <Drawer.Screen 
-      name="home" 
+      name="homeXXXXX" 
       component={TabRoutes}
       options={{
         drawerIcon: ({ color, size }) => <Feather name="home" color={color} size={size} />,
